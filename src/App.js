@@ -1,23 +1,50 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
+import Header from './components/Header';
+import Form from './components/Form';
+import TodoList from './components/TodoList';
+import ClearAll from './components/ClearAll';
 import './App.css';
 
 function App() {
+
+  const [inputJob,SetInputJob] = useState('')
+  const [todos,SetTodos] = useState([])
+  const [editToDo, setEditToDo] = useState(null)
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div className="container">
+          <div className="app-wrapper">
+            <div>
+              <Header/>
+            </div>
+            <div>
+              <Form
+                input = {inputJob}
+                setInput = {SetInputJob}
+                todos = {todos}
+                SetTodos = {SetTodos}
+                editToDo = {editToDo}
+                setEditToDo = {setEditToDo}
+              />
+            </div>
+            <div>
+              <TodoList
+                todos={todos}
+                SetTodos = {SetTodos}
+                setEditToDo = {setEditToDo}
+              />
+            </div>
+            <div>
+              {todos.length  === 0 ? null : <ClearAll SetTodos = {SetTodos}  todo={todos}/>}
+              
+
+            </div>
+          </div>
+        </div>
     </div>
   );
 }
